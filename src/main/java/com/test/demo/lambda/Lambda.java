@@ -1,87 +1,39 @@
-package com.test.demo.lambda;
+package com.test.demo;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
+import java.util.IntSummaryStatistics;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-/**
- * @Date 2016年11月11日 下午2:59:29
- * @author ryan
- * @version 1.0
- * @since JDK 1.8
- */
 public class Lambda {
-  private int num;
-  private String name;
-
-  public Lambda(int num, String name) {
-    this.num = num;
-    this.name = name;
-  }
-
-  public void print() {
-    System.out.format("num = %s, name = %s\n", num, name);
-  }
-
-  public static void main(String[] args) {
-
-    // runnable
-    new Thread(new Runnable() {
-      public void run() {
-        System.out.println("hello world one");
-      }
-    }).start();
-
-    new Thread(() -> System.out.println("hello world two")).start();
-
-    // Collections.sort
-    Lambda[] a = new Lambda[3];
-    a[0] = new Lambda(1, "b");
-    a[1] = new Lambda(2, "a");
-    a[2] = new Lambda(3, "c");
-
-    Arrays.sort(a, new Comparator<Lambda>() {
-      @Override
-      public int compare(Lambda o1, Lambda o2) {
-        return o1.getName().compareTo(o2.getName());
-      }
-    });
-
-    for (Lambda b : a) {
-      b.print();
-    }
-
-    Arrays.sort(a, (x, y) -> x.getNum() - y.getNum());
-
-    List<Lambda> b = Arrays.asList(a);
-    b.forEach(Lambda::print);
-
-    List<String> languages = Arrays.asList("java", "C++", "scala", "python", "C", "R", "PHP");
-    Predicate<String> condition = (str) -> str.startsWith("C");
-
-    languages.forEach(x -> {
-      if (condition.test(x)) {
-        System.out.println(x);
-      }
-    });
-  }
-
-  public int getNum() {
-    return num;
-  }
-
-  public void setNum(int num) {
-    this.num = num;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
+	public static void main(String []args) {
+		List<String> languages = Arrays.asList("java", "python", "scala", "C++", "C", "R", "PHP");
+		languages.stream().filter(x -> x.startsWith("C")).forEach(System.out::println);
+		int charNum = languages.stream().map(a -> a.length()).reduce((result, element) -> result + element).get();
+		System.out.println(charNum);
+		List<Integer> primes = Arrays.asList(2, 3, 5, 3, 11, 13, 11, 19, 23, 29);
+		IntSummaryStatistics summary = primes.stream().mapToInt(x -> x).summaryStatistics();
+		System.out.println("the max num is " + summary.getMax());
+		System.out.println("the sum is " + summary.getSum());
+		System.out.println("the avg is " + summary.getAverage());
+		int maxNum = primes.stream().map(x -> x * x).distinct().collect(Collectors.maxBy((x, y) -> x - y)).get();
+		System.out.println(maxNum);
+		// collect 使用collector来提供mutable reduction操作,提供了很多有用的collector,如groupingBy,joining,maxBy...
+		Map<Integer, List<String>> map = languages.stream().collect(Collectors.groupingBy((String x) -> x.length()));
+		map.forEach((x, y) -> {
+		  System.out.print("length is " + x + ": ");
+		  y.forEach(z -> System.out.print(z + ", "));
+		  System.out.println();
+		  
+		  // lambda可以使用静态,非静态,局部变量,这称为lambda的变量捕获
+		  // lambda又称闭包 或 匿名函数,   
+		  System.out.println("I'm the local var in main:charNum, " + charNum);
+		});
+		System.out.println(languages.stream().collect(Collectors.joining()));
+	}
+	
+	public void print() {
+	  System.out.println("this is a lambda instance");
+	}
 }
-
