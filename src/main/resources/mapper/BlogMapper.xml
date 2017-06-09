@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.demo.mybatis.dao.BlogDao">
+  <select id="queryById" resultMap="blogResultMap" resultSets="">
+    select
+      b.id,
+      b.title,
+      a.id as author_id,
+      a.username as author_username,
+      a.password as author_password
+    from blog b
+     LEFT OUTER JOIN author a on b.author_id = a.id
+    where b.id = #{id}
+  </select>
+  <select id="queryByTitle" resultType="blog">
+    select * from blog
+    <if test="title!=null">
+      where title like #{title}
+    </if>
+  </select>
+  <insert id="addBlog" parameterType="blog">
+    insert into blog (id, title, author_id) values (#{id}, #{title}, #{author.id})
+  </insert>
+  <resultMap id="blogResultMap" type="blog">
+    <association property="author" javaType="Author" columnPrefix="author_"/>
+  </resultMap>
+  <!--<cache/>-->
+</mapper>
