@@ -24,6 +24,6 @@ public class AuthorServiceImpl implements AuthorService {
   @Override
   public void addAuthor(Author author) {
     authorDao.addAuthor(author);
-    throw new RuntimeException();
+//    throw new RuntimeException();
   }
 }

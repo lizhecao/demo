@@ -14,8 +14,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 /**
  * Created by ryan on 2017/6/5.
  */
-@Component
-@Transactional(propagation = Propagation.REQUIRED)
+//@Component
+//@Transactional(propagation = Propagation.REQUIRED)
 public class PersonServiceImpl implements PersonService {
 
   //  @Resource
@@ -52,6 +52,7 @@ public class PersonServiceImpl implements PersonService {
 //        System.out.println("addPerson success");
 //      }
 //    });
+    // 最后一种方式，通过@transactional 注解 或 aop事务配置方式，可以实现0事务代码
     personDao.addPerson(person);
   }
 }

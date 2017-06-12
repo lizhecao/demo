@@ -1,9 +1,8 @@
 package com.test.demo.mybatis;
 
 import com.test.demo.jdbc.Person;
-import com.test.demo.mybatis.dao.AuthorDao;
 import com.test.demo.mybatis.dao.BlogDao;
-import com.test.demo.mybatis.entity.Author;
+import com.test.demo.mybatis.dao.PersonDao;
 import com.test.demo.mybatis.entity.Blog;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +18,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class Main {
 
   public static void main(String[] args) throws IOException {
+    // 读取配置文件，生成sqlSessionFactory
     InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
     SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
@@ -37,9 +37,10 @@ public class Main {
   }
 
   public static void testPerson(SqlSession sqlSession) {
-//      Person person = (Person) sqlSession.selectOne("com.test.demo.mybatis.PersonMapper.queryById", 1);
+    // 第一种获取mapper方式
+//      Person person = (Person) sqlSession.selectOne("com.test.demo.mybatis.dao.PersonDao.queryById", 1);
     // 这种方式更简洁只管一些，而且不用担心字符串写错了
-    PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
+    PersonDao personMapper = sqlSession.getMapper(PersonDao.class);
     Person person = personMapper.queryById("4");
 
     System.out.println(person);

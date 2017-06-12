@@ -18,6 +18,6 @@ public class App {
     System.out.println(authorService.getAuthor(1));
     BlogService blogService = (BlogService)ctx.getBean("blogServiceImpl");
     blogService.getBlog(1);
-    authorService.addAuthor(new Author(6, "jobs", "1234"));
+//    authorService.addAuthor(new Author(6, "jobs", "1234"));
   }
 }

@@ -17,11 +17,15 @@
 
   <!--<tx:jta-transaction-manager />-->
 
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="${driver}"/>
-    <property name="url" value="${jdbc.url}"/>
-    <property name="username" value="${jdbc.username}"/>
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="${driver}"/>
+    <property name="jdbcUrl" value="${jdbc.url}"/>
+    <property name="user" value="${jdbc.username}"/>
     <property name="password" value="${jdbc.password}"/>
+    <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+    <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
+    <property name="maxStatements" value="${jdbc.maxStatements}"/>
+    <property name="testConnectionOnCheckout" value="${jdbc.testConnectionOnCheckout}"/>
   </bean>
 
   <!-- 完全脱离mybatis-config配置了 -->
