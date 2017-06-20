@@ -1,5 +1,6 @@
 package com.test.demo.spring;
 
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -13,6 +14,15 @@ public class App {
     Teacher teacher = (Teacher)ctx.getBean("teacher");
     System.out.println(teacher.toString());
 
+    try {
+      App.class.getDeclaredConstructors()[0].newInstance();
+    } catch (InstantiationException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    } catch (InvocationTargetException e) {
+      e.printStackTrace();
+    }
     String s = "你好";
     byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
     for (int i = 0; i < bytes.length; i++) {

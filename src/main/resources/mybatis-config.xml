@@ -12,6 +12,8 @@
     <typeAlias type="com.test.demo.jdbc.Person" alias="person"/>
     <package name="com.test.demo.mybatis.entity"/>
   </typeAliases>
+  <!-- 数据库的数据类型 解析成 java类型 -->
+  <typeHandlers></typeHandlers>
   <!-- 主要配置了数据源 和 事务管理 -->
   <!--<environments default="development">-->
     <!--<environment id="development">-->

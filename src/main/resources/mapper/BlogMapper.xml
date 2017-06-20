@@ -2,8 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper的命名空间最好使用接口包+类名 -->
 <mapper namespace="com.test.demo.mybatis.dao.BlogDao">
-  <select id="queryById" resultMap="blogResultMap" resultSets="">
+  <select id="queryById" resultMap="blogResultMap">
     select
       b.id,
       b.title,
@@ -14,6 +15,9 @@
      LEFT OUTER JOIN author a on b.author_id = a.id
     where b.id = #{id}
   </select>
+
+  <!-- 这里要注意if 语句中要直接使用title 必须用@param注解该参数 -->
+  <!-- resultType blog 这里利用了type alias -->
   <select id="queryByTitle" resultType="blog">
     select * from blog
     <if test="title!=null">
@@ -24,6 +28,7 @@
     insert into blog (id, title, author_id) values (#{id}, #{title}, #{author.id})
   </insert>
   <resultMap id="blogResultMap" type="blog">
+    <result property="id" column="id"/>
     <association property="author" javaType="Author" columnPrefix="author_"/>
   </resultMap>
   <!--<cache/>-->
