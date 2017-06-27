@@ -11,6 +11,7 @@ import java.util.Random;
  * @author Javin Paul
  */
 public class ProducerConsumerInJava {
+  private  int i;
 
   public static void main(String args[]) {
     System.out.println("How to use wait and notify method in Java");

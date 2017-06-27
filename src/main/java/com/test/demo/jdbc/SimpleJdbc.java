@@ -34,6 +34,8 @@ public class SimpleJdbc {
 
       conn = new SimpleJdbc().getDataSource().getConnection();
 
+      conn.setAutoCommit(false);
+
       // sql
       String sql = "select * from person";
 
@@ -48,6 +50,9 @@ public class SimpleJdbc {
 
         System.out.println(id + " | " + name);
       }
+
+      // 设置 fetchsize提升读取性能
+//      rs.setFetchSize(100);
 
       // clean up
       rs.close();
