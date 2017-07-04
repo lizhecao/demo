@@ -5,7 +5,7 @@
          version="3.1">
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/root-context.xml</param-value>
+    <param-value>classpath:spring-base.xml</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -16,7 +16,7 @@
     <!-- 根据该配置文件创建一个webApplicationContext容器对象 -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value></param-value>
+      <param-value>/WEB-INF/root-context.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

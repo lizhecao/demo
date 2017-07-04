@@ -4,7 +4,11 @@
   xmlns:context="http://www.springframework.org/schema/context"
   xmlns:mvc="http://www.springframework.org/schema/mvc"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-  <context:component-scan base-package="com.test.demo.springmvc.web"/>
+  <context:component-scan base-package="com.test.demo.springmvc.web">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+  </context:component-scan>
+  <!-- necessary for spring mvc -->
+  <!-- provide @RequestMapping、@RequestBody、@ResponseBody and some httpMessageConvert implementation -->
   <mvc:annotation-driven>
     <!-- 添加自定义的消息转换器 -->
     <!--<mvc:message-converters>-->
@@ -13,6 +17,14 @@
       <!--</bean>-->
     <!--</mvc:message-converters>-->
   </mvc:annotation-driven>
+
+  <!-- also provided by mvc:anntation-driven -->
+  <!--配置注解控制器映射器,它是SpringMVC中用来将Request请求URL到映射到具体Controller-->
+  <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">-->
+    <!--<property name="detectHandlerMethodsInAncestorContexts" value="true"/>-->
+  <!--</bean>-->
+  <!--配置注解控制器映射器,它是SpringMVC中用来将具体请求映射到具体方法-->
+  <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
   
   <!-- View Resolver for JSPs -->
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
