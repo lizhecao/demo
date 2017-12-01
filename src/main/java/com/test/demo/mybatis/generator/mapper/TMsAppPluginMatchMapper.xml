@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.demo.mybatis.generator.dao.TMsAppPluginMatchMapper">
+  <resultMap id="BaseResultMap" type="com.test.demo.mybatis.generator.model.TMsAppPluginMatch">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="app_id" jdbcType="INTEGER" property="appId" />
+    <result column="main_id" jdbcType="BIGINT" property="mainId" />
+    <result column="main_version" jdbcType="VARCHAR" property="mainVersion" />
+    <result column="app_enterprise" jdbcType="VARCHAR" property="appEnterprise" />
+    <result column="app_type" jdbcType="VARCHAR" property="appType" />
+    <result column="app_model" jdbcType="VARCHAR" property="appModel" />
+    <result column="plugin_version" jdbcType="INTEGER" property="pluginVersion" />
+    <result column="plugin_id" jdbcType="VARCHAR" property="pluginId" />
+    <result column="del" jdbcType="TINYINT" property="del" />
+    <result column="cuid" jdbcType="INTEGER" property="cuid" />
+    <result column="muid" jdbcType="INTEGER" property="muid" />
+    <result column="cdate" jdbcType="TIMESTAMP" property="cdate" />
+    <result column="mdate" jdbcType="TIMESTAMP" property="mdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, app_id, main_id, main_version, app_enterprise, app_type, app_model, plugin_version, 
+    plugin_id, del, cuid, muid, cdate, mdate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from "t_ms_app_plugin_match"
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from "t_ms_app_plugin_match"
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.test.demo.mybatis.generator.model.TMsAppPluginMatch">
+    insert into "t_ms_app_plugin_match" (id, app_id, main_id, 
+      main_version, app_enterprise, app_type, 
+      app_model, plugin_version, plugin_id, 
+      del, cuid, muid, cdate, 
+      mdate)
+    values (#{id,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, #{mainId,jdbcType=BIGINT}, 
+      #{mainVersion,jdbcType=VARCHAR}, #{appEnterprise,jdbcType=VARCHAR}, #{appType,jdbcType=VARCHAR}, 
+      #{appModel,jdbcType=VARCHAR}, #{pluginVersion,jdbcType=INTEGER}, #{pluginId,jdbcType=VARCHAR}, 
+      #{del,jdbcType=TINYINT}, #{cuid,jdbcType=INTEGER}, #{muid,jdbcType=INTEGER}, #{cdate,jdbcType=TIMESTAMP}, 
+      #{mdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.demo.mybatis.generator.model.TMsAppPluginMatch">
+    insert into "t_ms_app_plugin_match"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="mainId != null">
+        main_id,
+      </if>
+      <if test="mainVersion != null">
+        main_version,
+      </if>
+      <if test="appEnterprise != null">
+        app_enterprise,
+      </if>
+      <if test="appType != null">
+        app_type,
+      </if>
+      <if test="appModel != null">
+        app_model,
+      </if>
+      <if test="pluginVersion != null">
+        plugin_version,
+      </if>
+      <if test="pluginId != null">
+        plugin_id,
+      </if>
+      <if test="del != null">
+        del,
+      </if>
+      <if test="cuid != null">
+        cuid,
+      </if>
+      <if test="muid != null">
+        muid,
+      </if>
+      <if test="cdate != null">
+        cdate,
+      </if>
+      <if test="mdate != null">
+        mdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="mainId != null">
+        #{mainId,jdbcType=BIGINT},
+      </if>
+      <if test="mainVersion != null">
+        #{mainVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="appEnterprise != null">
+        #{appEnterprise,jdbcType=VARCHAR},
+      </if>
+      <if test="appType != null">
+        #{appType,jdbcType=VARCHAR},
+      </if>
+      <if test="appModel != null">
+        #{appModel,jdbcType=VARCHAR},
+      </if>
+      <if test="pluginVersion != null">
+        #{pluginVersion,jdbcType=INTEGER},
+      </if>
+      <if test="pluginId != null">
+        #{pluginId,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        #{del,jdbcType=TINYINT},
+      </if>
+      <if test="cuid != null">
+        #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="muid != null">
+        #{muid,jdbcType=INTEGER},
+      </if>
+      <if test="cdate != null">
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mdate != null">
+        #{mdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.demo.mybatis.generator.model.TMsAppPluginMatch">
+    update "t_ms_app_plugin_match"
+    <set>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="mainId != null">
+        main_id = #{mainId,jdbcType=BIGINT},
+      </if>
+      <if test="mainVersion != null">
+        main_version = #{mainVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="appEnterprise != null">
+        app_enterprise = #{appEnterprise,jdbcType=VARCHAR},
+      </if>
+      <if test="appType != null">
+        app_type = #{appType,jdbcType=VARCHAR},
+      </if>
+      <if test="appModel != null">
+        app_model = #{appModel,jdbcType=VARCHAR},
+      </if>
+      <if test="pluginVersion != null">
+        plugin_version = #{pluginVersion,jdbcType=INTEGER},
+      </if>
+      <if test="pluginId != null">
+        plugin_id = #{pluginId,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=TINYINT},
+      </if>
+      <if test="cuid != null">
+        cuid = #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="muid != null">
+        muid = #{muid,jdbcType=INTEGER},
+      </if>
+      <if test="cdate != null">
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mdate != null">
+        mdate = #{mdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.demo.mybatis.generator.model.TMsAppPluginMatch">
+    update "t_ms_app_plugin_match"
+    set app_id = #{appId,jdbcType=INTEGER},
+      main_id = #{mainId,jdbcType=BIGINT},
+      main_version = #{mainVersion,jdbcType=VARCHAR},
+      app_enterprise = #{appEnterprise,jdbcType=VARCHAR},
+      app_type = #{appType,jdbcType=VARCHAR},
+      app_model = #{appModel,jdbcType=VARCHAR},
+      plugin_version = #{pluginVersion,jdbcType=INTEGER},
+      plugin_id = #{pluginId,jdbcType=VARCHAR},
+      del = #{del,jdbcType=TINYINT},
+      cuid = #{cuid,jdbcType=INTEGER},
+      muid = #{muid,jdbcType=INTEGER},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      mdate = #{mdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
