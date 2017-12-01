@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 public class Teacher {
   private String id;
   private String name;
-  @Autowired
-  private List<Student> students;
-  @Autowired
-  private Map<String, Student> studentMap;
+//  @Autowired
+//  private List<Student> students;
+//  @Autowired
+//  private Map<String, Student> studentMap;
 }

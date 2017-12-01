@@ -48,7 +48,7 @@
       <!--<ignoreColumn column="FRED" />-->
       <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
     <!--</table>-->
-    <table tableName="%" schema="test" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+    <table tableName="t_ms_app_plugin_match" schema="smart" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
       enableUpdateByExample="false" delimitIdentifiers="true"/>
     <!--<table tableName="blog" schema="test"/>-->
     <!--<table tableName="author" schema="test"/>-->
