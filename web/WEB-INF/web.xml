@@ -18,7 +18,7 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/root-context.xml</param-value>
     </init-param>
-    <load-on-startup>1</load-on-startup>
+    <loadFactor-on-startup>1</loadFactor-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>

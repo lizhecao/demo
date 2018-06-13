@@ -15,7 +15,7 @@ public class LockConditionTest {
     ReentrantLock lock = new ReentrantLock();
     Condition condition = lock.newCondition();
     Condition condition1 = lock.newCondition();
-    final int size = 5;
+    final int size = 100;
     Queue queue = new ArrayDeque(size);
 
     new Thread(new Producer2(lock, condition, queue, size)).start();
@@ -78,7 +78,7 @@ class Producer2 implements Runnable {
     try {
       lock.lock();
       while(true) {
-        if (queue.size() < size - 1) {
+        if (queue.size() < size) {
           int rand = new Random().nextInt(100);
           queue.offer(rand);
           System.out.println("Producer " + Thread.currentThread().getName() + " produce: " + rand);

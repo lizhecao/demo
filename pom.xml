@@ -8,6 +8,9 @@
   <modules>
     <module>javamail</module>
 	  <module>code</module>
+	  <module>hashmap</module>
+      <module>reflect</module>
+      <module>spring_security</module>
   </modules>
   <packaging>pom</packaging>
 
