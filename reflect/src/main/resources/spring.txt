@@ -1,0 +1,2 @@
+class=com.test.Service4
+method=hello
