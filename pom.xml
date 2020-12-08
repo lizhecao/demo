@@ -27,7 +27,7 @@
 	<properties>
 		<jersey.version>2.24.1</jersey.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>5.0.6.RELEASE</spring.version>
+		<spring.version>5.3.1</spring.version>
 		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
 	</properties>
 
@@ -217,7 +217,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.0.6.RELEASE</version>
+            <version>5.3.1</version>
         </dependency>
 		<dependency>
 			<groupId>io.github.resilience4j</groupId>
