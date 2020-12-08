@@ -1,12 +1,13 @@
 package com.test.demo.mybatis;
 
-import com.test.demo.jdbc.Person;
 import com.test.demo.mybatis.dao.BlogDao;
 import com.test.demo.mybatis.dao.PersonDao;
 import com.test.demo.mybatis.entity.Blog;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import com.test.demo.mybatis.entity.Person;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

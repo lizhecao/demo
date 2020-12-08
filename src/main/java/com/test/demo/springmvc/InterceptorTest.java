@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
+ * spring mvc 拦截器
  * Created by ryan on 2017/6/13.
  */
 public class InterceptorTest extends HandlerInterceptorAdapter {

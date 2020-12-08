@@ -25,6 +25,16 @@
     <!-- 监听所有请求 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <!-- SpringSession 过滤器 -->
+  <filter>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <!-- 映射到default-servlet来获取不需要处理的资源 -->
   <!--<servlet-mapping>-->
     <!--<servlet-name>default</servlet-name>-->

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-//@EnableEurekaClient
+@EnableEurekaClient
 @RestController
 public class EurekaclientApplication {
 	@Value("${server.port}")

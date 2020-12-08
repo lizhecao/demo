@@ -23,7 +23,7 @@ public class LockTest implements Runnable {
   }
 
   @Override
-  public void run() {
+  public synchronized void run() {
     try {
       while (true) {
         if (lock.tryLock()) {

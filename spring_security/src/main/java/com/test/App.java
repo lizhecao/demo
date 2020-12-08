@@ -24,6 +24,7 @@ public class App {
     @Bean
     public CommandLineRunner makeData(UserRepository userRepository, RoleRepository roleRepository) {
         return (args -> {
+            System.out.println("start CommandLineRunner");
             String passwd = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("ryan");
             User user1 = new User(1, "ryan", passwd);
             Role role1 = new Role("USER", 1);

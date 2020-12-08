@@ -8,4 +8,5 @@ import com.test.demo.mybatis.entity.Author;
 public interface AuthorService {
   Author getAuthor(int id);
   void addAuthor(Author author);
+  void addAuthor4IsolationTest(Author author);
 }

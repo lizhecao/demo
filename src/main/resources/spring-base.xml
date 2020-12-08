@@ -22,4 +22,24 @@
   <bean id="s1" class="com.test.demo.spring.Student"/>
   <bean id="s2" class="com.test.demo.spring.Student"/>
   <bean id="s3" class="com.test.demo.spring.Student"/>
+
+  <!--<bean id="redisHttpSessionConfiguration"-->
+        <!--class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">-->
+    <!--<property name="maxInactiveIntervalInSeconds" value="600"/>-->
+  <!--</bean>-->
+
+  <!--<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">-->
+    <!--<property name="maxTotal" value="100" />-->
+    <!--<property name="maxIdle" value="10" />-->
+  <!--</bean>-->
+
+  <!--<bean id="jedisConnectionFactory"-->
+        <!--class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">-->
+    <!--<property name="hostName" value="${redis_hostname}"/>-->
+    <!--<property name="port" value="${redis_port}"/>-->
+    <!--<property name="password" value="${redis_pwd}" />-->
+    <!--<property name="timeout" value="3000"/>-->
+    <!--<property name="usePool" value="true"/>-->
+    <!--<property name="poolConfig" ref="jedisPoolConfig"/>-->
+  <!--</bean>-->
 </beans>
