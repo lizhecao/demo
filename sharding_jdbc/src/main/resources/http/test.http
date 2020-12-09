@@ -1,0 +1,22 @@
+POST http://localhost:8080/order/add
+Content-Type: application/json
+
+{
+  "tradeType": "demoData",
+  "amount": 1,
+  "currency": "demoData",
+  "status": "1",
+  "channel": "demoData",
+  "tradeNo": "demoData",
+  "userId": 2,
+  "remark": "demoData"
+}
+
+###
+GET http://localhost:8080/order/?userId=2
+Accept: application/json
+
+###
+
+
+###

@@ -1,12 +1,11 @@
 package com.example.sharding_jdbc.controller;
 
+import com.example.sharding_jdbc.entity.Order;
 import com.example.sharding_jdbc.mapper.OrderMapper;
-import com.example.sharding_jdbc.model.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author lizhecao 2020/12/9
@@ -18,8 +17,22 @@ public class OrderController {
   @Autowired
   private OrderMapper orderMapper;
 
-  @GetMapping("add")
-  public void add(@RequestBody OrderEntity orderEntity) {
-    orderMapper.insertOrderEntity(orderEntity);
+  @PostMapping("add")
+  public void add(@RequestBody Order order) {
+    orderMapper.insertSelective(order);
+  }
+
+  @GetMapping("{orderId}")
+  public Order getOrder(@PathVariable Long orderId, @RequestParam Long userId) {
+    return orderMapper.selectByUserIdNOrderId(orderId, userId);
+  }
+
+  @GetMapping
+  public List<Order> getOrder(@RequestParam Long userId) {
+    return orderMapper.selectByUserId(userId);
+  }
+
+  public static void main(String[] args) {
+    System.out.println(543494592646328321L % 32);
   }
 }

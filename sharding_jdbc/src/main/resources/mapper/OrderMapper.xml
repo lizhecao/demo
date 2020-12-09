@@ -1,7 +1,216 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="packageMapper.OrderMapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.sharding_jdbc.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.example.sharding_jdbc.entity.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_id, trade_type, amount, currency, status, channel, trade_no, user_id, update_time, 
+    create_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUserIdNOrderId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+    where user_id = #{userId,jdbcType=BIGINT} and order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.sharding_jdbc.entity.Order" >
+    insert into t_order (id, order_id, trade_type, 
+      amount, currency, status, 
+      channel, trade_no, user_id, 
+      update_time, create_time, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{tradeType,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=BIGINT}, #{currency,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.sharding_jdbc.entity.Order" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="tradeNo != null" >
+        trade_no,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.sharding_jdbc.entity.Order" >
+    update t_order
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.sharding_jdbc.entity.Order" >
+    update t_order
+    set order_id = #{orderId,jdbcType=BIGINT},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=BIGINT},
+      currency = #{currency,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 
+  <update id="createTableIfNotExists">
+        CREATE TABLE IF NOT EXISTS t_order (id bigint not null primary key auto_increment,
+ order_id bigint comment '业务方订单号（业务方系统唯一）',
+ trade_type varchar (30) comment '业务交易类型，例如topup-表示钱包充值',
+ amount bigint comment '交易金额，以分为单位',
+ currency varchar (10) comment '币种，cny-人民币',
+ status varchar (2) comment '支付状态，0-待支付；1-支付中；2-支付成功；3-支付失败',
+ channel varchar (10) comment '支付渠道编码，0-微信支付，1-支付宝支付',
+ trade_no varchar (32) comment '支付渠道流水号',
+ user_id bigint (60) comment '业务方用户id',
+ update_time timestamp null default current_timestamp on update current_timestamp comment '最后一次更新时间',
+ create_time timestamp null default current_timestamp comment '交易创建时间',
+ remark varchar(128)  comment '订单备注信息',
+ key unique_idx_pay_id ( order_id ),
+ key idx_user_id ( user_id ),
+ key idx_create_time ( create_time ));
+    </update>
+
+  <update id="truncateTable">
+        TRUNCATE TABLE t_order;
+    </update>
+
+  <update id="dropTable">
+        DROP TABLE IF EXISTS t_order;
+    </update>
 
 </mapper>
