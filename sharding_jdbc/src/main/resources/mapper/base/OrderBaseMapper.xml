@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="packageMapper.base.OrderBaseMapper">
+
+
+    <insert id="insertOrderEntity"  useGeneratedKeys="true" keyProperty="order_id">
+        INSERT INTO `t_order`
+        (
+        <trim suffixOverrides=",">
+                    <if test="order_id!=null">
+                        `order_id`,
+                    </if>
+                    <if test="user_id!=null">
+                        `user_id`,
+                    </if>
+                    <if test="status!=null">
+                        `status`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="order_id!=null">
+                    #{order_id},
+                </if>
+                <if test="user_id!=null">
+                    #{user_id},
+                </if>
+                <if test="status!=null">
+                    #{status},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateOrderEntity">
+        UPDATE `t_order`
+        SET
+        <trim suffixOverrides=",">
+            <if test="user_id != null">
+                `user_id` = #{user_id},
+            </if>
+            <if test="status != null and status!=''">
+                `status` = #{status},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `order_id` = #{order_id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `t_order`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.user_id != null">
+            `user_id` = #{set.user_id},
+        </if>
+        <if test="set.status != null and set.status!=''">
+            `status` = #{set.status},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.order_idList != null">
+                    `order_id` in
+                    <foreach collection="where.order_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.order_idSt !=null">
+                `order_id` >= #{where.order_idSt} and
+            </if>
+            <if test="where.order_idEd!=null">
+                `order_id` &lt;= #{where.order_idEd} and
+            </if>
+                <if test="where.user_idList != null">
+                    `user_id` in
+                    <foreach collection="where.user_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.user_idSt !=null">
+                `user_id` >= #{where.user_idSt} and
+            </if>
+            <if test="where.user_idEd!=null">
+                `user_id` &lt;= #{where.user_idEd} and
+            </if>
+                <if test="where.statusList != null">
+                    `status` in
+                    <foreach collection="where.statusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyStatus!=null and where.fuzzyStatus.size()>0">
+                (
+                <foreach collection="where.fuzzyStatus"  separator="or" item="item">
+                    `Status` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyStatus!=null and where.rightFuzzyStatus.size()>0">
+                (
+                <foreach collection="where.rightFuzzyStatus"  separator="or" item="item">
+                    `Status` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="packageModel.OrderEntity" id="OrderEntityMap">
+        <result property="order_id" column="order_id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+    <select id="queryOrderEntity" resultMap="OrderEntityMap">
+        select
+        <include refid="baseResult"></include>
+        from  `t_order`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="order_id != null">
+                `order_id` = #{order_id} and
+            </if>
+            <if test="user_id != null">
+                `user_id` = #{user_id} and
+            </if>
+            <if test="status != null and status!=''">
+                `status` = #{status} and
+            </if>
+            <if test = "(_parameter instanceof packageModel.OrderEntity$QueryBuilder) == true">
+                <if test="order_idList != null">
+                    `order_id` in
+                    <foreach collection="order_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="order_idSt !=null">
+                    `order_id` >= #{order_idSt} and
+                </if>
+                <if test="order_idEd!=null">
+                    `order_id` &lt;= #{order_idEd} and
+                </if>
+                <if test="user_idList != null">
+                    `user_id` in
+                    <foreach collection="user_idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="user_idSt !=null">
+                    `user_id` >= #{user_idSt} and
+                </if>
+                <if test="user_idEd!=null">
+                    `user_id` &lt;= #{user_idEd} and
+                </if>
+                <if test="statusList != null">
+                    `status` in
+                    <foreach collection="statusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyStatus!=null and fuzzyStatus.size()>0">
+                    (
+                    <foreach collection="fuzzyStatus"  separator="or" item="item">
+                        `Status` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyStatus!=null and rightFuzzyStatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyStatus"  separator="or" item="item">
+                        `Status` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryOrderEntityLimit1" resultMap="OrderEntityMap">
+        select
+        <include refid="baseResult"></include>
+        from  `t_order`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="order_id != null">
+                `order_id` = #{order_id} and
+            </if>
+            <if test="user_id != null">
+                `user_id` = #{user_id} and
+            </if>
+            <if test="status != null and status!=''">
+                `status` = #{status} and
+            </if>
+            <if test = "(_parameter instanceof packageModel.OrderEntity$QueryBuilder) == true">
+                    <if test="order_idList != null">
+                        `order_id` in
+                        <foreach collection="order_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="order_idSt !=null">
+                    `order_id` >= #{order_idSt} and
+                </if>
+                <if test="order_idEd!=null">
+                    `order_id` &lt;= #{order_idEd} and
+                </if>
+                    <if test="user_idList != null">
+                        `user_id` in
+                        <foreach collection="user_idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="user_idSt !=null">
+                    `user_id` >= #{user_idSt} and
+                </if>
+                <if test="user_idEd!=null">
+                    `user_id` &lt;= #{user_idEd} and
+                </if>
+                    <if test="statusList != null">
+                        `status` in
+                        <foreach collection="statusList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyStatus!=null and fuzzyStatus.size()>0">
+                    (
+                    <foreach collection="fuzzyStatus"  separator="or" item="item">
+                        `Status` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyStatus!=null and rightFuzzyStatus.size()>0">
+                    (
+                    <foreach collection="rightFuzzyStatus"  separator="or" item="item">
+                        `Status` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `order_id`,
+        `user_id`,
+        `status`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof packageModel.OrderEntity$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.order_id==true">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.user_id==true">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.status==true">
+                        `status`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.order_id==null">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.user_id==null">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.status==null">
+                        `status`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof packageModel.OrderEntity$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
