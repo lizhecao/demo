@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @version 1.0
  */
 abstract class AbstractClass {
-  @Value("${server.port}")
+//  @Value("${server.port}")
   private String port;
 
   public String getPort() {

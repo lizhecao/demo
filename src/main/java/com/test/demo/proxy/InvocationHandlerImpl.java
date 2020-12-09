@@ -27,7 +27,6 @@ public class InvocationHandlerImpl implements InvocationHandler {
 
     // 调用目标对象的实际方法
     Object result = method.invoke(target, args);
-
     System.out.println("end");
 
     return  result;
@@ -42,16 +41,18 @@ public class InvocationHandlerImpl implements InvocationHandler {
   }
 
   public static void main(String[] args) {
+
     // 实例化目标对象
-    User user = new UserImpl();
+//    User user = new UserImpl();
+    User.class.getMethods();
 
     // 用目标对象实例化InvocationHandler
-    InvocationHandlerImpl invocationHandler = new InvocationHandlerImpl(user);
+//    InvocationHandlerImpl invocationHandler = new InvocationHandlerImpl(user);
 
     // 生成代理对象
-    User proxyUser = (User) invocationHandler.getProxy();
+//    User proxyUser = (User) invocationHandler.getProxy();
 
     // 调用代理对象的方法，实际上就是调用了invocationHandler的invoke方法
-    proxyUser.sayHello();
+//    proxyUser.sayHello();
   }
 }

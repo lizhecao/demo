@@ -36,5 +36,7 @@ public class App {
     ApplicationContext ctx = SpringApplication.run(App.class, args);
     InspectAbstractTest inspectAbstractTest = (InspectAbstractTest) ctx.getBean("inspectAbstractTest");
     System.out.println(inspectAbstractTest.getPort());
+
+
   }
 }

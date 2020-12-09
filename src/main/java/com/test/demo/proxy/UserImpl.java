@@ -6,9 +6,8 @@ package com.test.demo.proxy;
  * @author lizhecao 2018/4/19
  * @version 1.0
  */
-public class UserImpl implements User {
-  @Override
-  public void sayHello() {
+public class UserImpl {
+  public void sayHello(String name, Integer code) {
     System.out.println("hello");
   }
 }

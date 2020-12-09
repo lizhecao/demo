@@ -168,25 +168,25 @@ public class MyHashMap<K, V> implements MyHashMapInterface<K, V> {
       }
   }
 
-  public static void main(String[] args) {
-    MyHashMapInterface<Integer, String> map = new MyHashMap<>(16, 0.5f);
-    map.insert(1, "ryan");
-    map.insert(38, "jack");
-    map.insert(119, "rose");
-
-    map.print();
-
-//    System.out.println(map.get(119));
+//  public static void main(String[] args) {
+//    MyHashMapInterface<Integer, String> map = new MyHashMap<>(16, 0.5f);
+//    map.insert(1, "ryan");
+//    map.insert(38, "jack");
+//    map.insert(119, "rose");
 //
-//    map.del(849);
-
 //    map.print();
-
-//    map.insert(880, "ethan");
-
-    for (int i = 0; i < 100; i ++) {
-      map.insert(i+200, "hello");
-    }
-    map.print();
-  }
+//
+////    System.out.println(map.get(119));
+////
+////    map.del(849);
+//
+////    map.print();
+//
+////    map.insert(880, "ethan");
+//
+//    for (int i = 0; i < 100; i ++) {
+//      map.insert(i+200, "hello");
+//    }
+//    map.print();
+//  }
 }

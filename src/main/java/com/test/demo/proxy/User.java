@@ -7,5 +7,5 @@ package com.test.demo.proxy;
  * @version 1.0
  */
 public interface User {
-  void sayHello();
+  void sayHello(String name, Integer code);
 }
