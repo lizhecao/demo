@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.sharding_jdbc.mapper.OrderMapper" >
+<mapper namespace="com.example.sharding_jdbc.mapper.OrderMapper1" >
   <resultMap id="BaseResultMap" type="com.example.sharding_jdbc.entity.Order" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="order_id" property="orderId" jdbcType="BIGINT" />
@@ -22,27 +22,27 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_order
+    from t_order1
     where id = #{id,jdbcType=BIGINT}
   </select>
   <select id="selectByUserIdNOrderId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
-    from t_order
+    from t_order1
     where user_id = #{userId,jdbcType=BIGINT} and order_id = #{orderId,jdbcType=BIGINT}
   </select>
   <select id="selectByUserId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
-    from t_order
+    from t_order1
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_order
+    delete from t_order1
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.example.sharding_jdbc.entity.Order" >
-    insert into t_order (id, order_id, trade_type, 
+    insert into t_order1 (id, order_id, trade_type, 
       amount, currency, status, 
       channel, trade_no, user_id, 
       update_time, create_time, remark
@@ -54,8 +54,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.sharding_jdbc.entity.Order" >
-
-    insert into t_order
+    insert into t_order1
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -134,7 +133,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.sharding_jdbc.entity.Order" >
-    update t_order
+    update t_order1
     <set >
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=BIGINT},
@@ -173,7 +172,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.sharding_jdbc.entity.Order" >
-    update t_order
+    update t_order1
     set order_id = #{orderId,jdbcType=BIGINT},
       trade_type = #{tradeType,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=BIGINT},
@@ -189,7 +188,7 @@
   </update>
 
   <update id="createTableIfNotExists">
-        CREATE TABLE IF NOT EXISTS t_order (id bigint not null primary key auto_increment,
+        CREATE TABLE IF NOT EXISTS t_order1 (id bigint not null primary key auto_increment,
  order_id bigint comment '业务方订单号（业务方系统唯一）',
  trade_type varchar (30) comment '业务交易类型，例如topup-表示钱包充值',
  amount bigint comment '交易金额，以分为单位',
@@ -207,11 +206,11 @@
     </update>
 
   <update id="truncateTable">
-        TRUNCATE TABLE t_order;
+        TRUNCATE TABLE t_order1;
     </update>
 
   <update id="dropTable">
-        DROP TABLE IF EXISTS t_order;
+        DROP TABLE IF EXISTS t_order1;
     </update>
 
 </mapper>

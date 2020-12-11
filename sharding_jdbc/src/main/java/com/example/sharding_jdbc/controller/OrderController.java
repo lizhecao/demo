@@ -2,6 +2,7 @@ package com.example.sharding_jdbc.controller;
 
 import com.example.sharding_jdbc.entity.Order;
 import com.example.sharding_jdbc.mapper.OrderMapper;
+import com.example.sharding_jdbc.mapper.OrderMapper1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,13 @@ import java.util.List;
 public class OrderController {
   @Autowired
   private OrderMapper orderMapper;
+  @Autowired
+  private OrderMapper1 orderMapper1;
 
   @PostMapping("add")
   public void add(@RequestBody Order order) {
     orderMapper.insertSelective(order);
+    orderMapper1.insertSelective(order);
   }
 
   @GetMapping("{orderId}")
