@@ -31,12 +31,23 @@
     from t_order
     where user_id = #{userId,jdbcType=BIGINT} and order_id = #{orderId,jdbcType=BIGINT}
   </select>
+  <select id="select" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+    order by order_id
+    limit #{offset}, #{size}
+  </select>
   <select id="selectByUserId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from t_order
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
+  <delete id="deleteByOrderIdNUserId" parameterType="java.lang.Long" >
+    delete from t_order
+    where user_id = #{userId,jdbcType=BIGINT} and order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_order
     where id = #{id,jdbcType=BIGINT}
@@ -53,8 +64,8 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.sharding_jdbc.entity.Order" >
-
+  <insert id="insertSelective" parameterType="com.example.sharding_jdbc.entity.Order" useGeneratedKeys="true"
+          keyProperty="orderId" keyColumn="order_id">
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

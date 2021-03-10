@@ -11,9 +11,8 @@ create table t_order (
  update_time timestamp null default current_timestamp on update current_timestamp comment '最后一次更新时间',
  create_time timestamp null default current_timestamp comment '交易创建时间',
  remark varchar(128)  comment '订单备注信息',
- key unique_idx_pay_id ( order_id ),
+ unique key unique_idx_pay_id ( order_id ),
  key idx_user_id ( user_id ),
  key idx_create_time ( create_time )
 ) comment '交易订单表';
 
-// 分32个表

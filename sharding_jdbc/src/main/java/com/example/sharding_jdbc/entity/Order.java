@@ -122,4 +122,22 @@ public class Order {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+            "id=" + id +
+            ", orderId=" + orderId +
+            ", tradeType='" + tradeType + '\'' +
+            ", amount=" + amount +
+            ", currency='" + currency + '\'' +
+            ", status='" + status + '\'' +
+            ", channel='" + channel + '\'' +
+            ", tradeNo='" + tradeNo + '\'' +
+            ", userId=" + userId +
+            ", updateTime=" + updateTime +
+            ", createTime=" + createTime +
+            ", remark='" + remark + '\'' +
+            '}';
+    }
 }
