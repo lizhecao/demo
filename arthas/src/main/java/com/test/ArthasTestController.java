@@ -1,6 +1,8 @@
 package com.test;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -19,9 +21,9 @@ import java.util.concurrent.Executors;
  * @create: 2020-07-21 17:38
  **/
 @RestController
-@Slf4j
 @SpringBootApplication
 public class ArthasTestController {
+    private static Logger log = LoggerFactory.getLogger(ArthasTestController.class);
     private static ExecutorService executorService = Executors.newFixedThreadPool(1);
     private static HashSet hashSet = new HashSet();
 
@@ -34,13 +36,13 @@ public class ArthasTestController {
 //        ApplicationContext ctx = SpringApplication.run(ArthasTestController.class, args);
         // 模拟线程阻塞
         // 模拟 CPU 过高，这里注释掉了，测试时可以打开
-         cpu();
+//         cpu();
         // 模拟线程阻塞
-//        thread();
+        thread();
         // 模拟线程死锁
-//        deadThread();
+        deadThread();
         // 不断的向 hashSet 集合增加数据
-//        addHashSetThread();
+        addHashSetThread();
     }
     public static void addHashSetThread() {
         // 初始化常量
@@ -99,14 +101,14 @@ public class ArthasTestController {
      */
     private static void thread() {
         Thread thread1 = new Thread(() -> {
-            while (true) {
+//            while (true) {
                 log.debug("thread1 will start");
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(60000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
+//            }
         });
         Thread thread2 = new Thread(() -> {
             while (true) {
