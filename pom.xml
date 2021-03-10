@@ -29,7 +29,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>5.3.1</spring.version>
 		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
-		<lombok.version>1.16.20</lombok.version>
+		<lombok.version>1.18.16</lombok.version>
 	</properties>
 
 	<dependencyManagement>

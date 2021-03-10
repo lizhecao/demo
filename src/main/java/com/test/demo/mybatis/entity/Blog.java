@@ -1,6 +1,5 @@
 package com.test.demo.mybatis.entity;
 
-import com.sun.xml.internal.ws.developer.Serialization;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Getter;
